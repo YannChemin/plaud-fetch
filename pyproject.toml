@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plaud-fetch"
+version = "0.1.0"
+description = "Fetch Plaud Note Pro recordings over Bluetooth into dated meeting folders"
+readme = "README.md"
+license = "Unlicense"
+requires-python = ">=3.11"
+authors = [{ name = "Yann Chemin" }]
+# The BLE protocol comes from plaud-pc-bridge (plaud-direct-pc-research,
+# Apache-2.0), installed from its local clone; see the Makefile.
+dependencies = ["plaud-pc-bridge", "bleak>=0.22", "cryptography>=41", "numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+plaud-fetch = "plaud_fetch.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["plaud_fetch*"]
+
+[tool.pytest.ini_options]
+python_files = ["*_test.py"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
